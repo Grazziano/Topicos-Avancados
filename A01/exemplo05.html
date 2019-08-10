@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exemplos-React</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+
+    function Welcome(props) {
+        return <h1>Olá {props.nome} - sua idade é: {props.idade} anos</h1>
+    }
+    const element=(
+    <div>
+        <Welcome nome='Ana Maria' idade='25'/>
+        <Welcome nome='José Santos' idade='47'/>
+        <Welcome nome='Simone Matos' idade='21'/>
+    </div>
+    )
+        ReactDOM.render(
+        element,
+        document.getElementById('root')
+    );
+    </script>
+</body>
+
+</html>
