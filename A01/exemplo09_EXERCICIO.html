@@ -89,19 +89,8 @@
 
         <article>
             <h4>Você concorda com a pintura do prédio?</h4>
-            <div id="container">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sim" id="sim">
-                    <label class="form-check-label" for="inlineCheckbox1">SIM</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="nao" id="nao">
-                    <label class="form-check-label" for="inlineCheckbox2">NÃO</label>
-                </div>
-                <button class="btn btn-success btn-lg">Votar</button>
-            </div>
-
-            <!-- <div id="root"></div> -->
+            
+            <div id="root" class="m-2"></div>
 
             <hr>
             <div id="resultado">
@@ -116,31 +105,71 @@
     <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    
     <script type="text/babel">
+        class App extends React.Component{
 
+            state = {
+                numSim: 0,
+                numNao: 0,
+                voto: ''
+            }
 
-    class App extends React.Component{
+            handleChange = e => {
+                if (e.target.name == 'rbSim') {
+                    this.setState({voto: 'sim'})
+                }else{
+                    this.setState({voto: 'nao'})
+                }
+            }
 
-        function Votos(props) {
-        return <h1>SIM - Total de votos {props.sim}</h1>
-        return <h1>NÃO - Total de votos {props.nao}</h1>
-    }
+            hendleClick = () =>{
+                if (this.state.voto == '') {
+                    alert('Selecione sim ou não para o seu voto')
+                }else if (this.state.voto == 'sim'){
+                    this.setState({numSim : this.state.numSim + 1})
+                }else{
+                    this.setState({numNao : this.state.numNao + 1})
+                }
+                this.setState({voto: ''})
+            }
 
-    this.state = { 
- sim:'', 
- nao: '', 
- }; 
+          render(){
+            return(
+                <div className='container'>
+        <div className='row'>
+            
+            <div className='col-sm-8'>
+                <h5>Codominium Avenida-Voting</h5>
+                <h6 className="mb-3">Você concorda com a pintura do muro?</h6>
+                <div className="form-check-inline">
+                    <label className="form-check-label">
+                        <input type="radio" className="form-check-input" name="rbSim" 
+                        checked={this.state.voto=='sim'} onChange={this.handleChange} />Sim
+                        <input type="radio" className="form-check-input" name="rbNao" checked={this.state.voto=='nao'}
+                            onChange={this.handleChange} />Não
+                    </label>
+                </div>
+                <button className='btn btn-primary ml-3 px-5' onClick={this.hendleClick}>
+                    Vote
+                </button>
+                <h6 className="text-danger mt-4">Average Votes Yes: {this.state.numSim}</h6>
+                <h6 className="text-danger">Average votes No: {this.state.numNao}</h6>
+            </div>
+        </div>
+    </div>
+            )
+          }
+        }
+  
+        ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+        )
+  
+      </script>
 
-    const element=<Welcome sim='1' nao='1'/>
-
-    }
-
-
-    ReactDOM.render(
-    <App />,
-    document.getElementById('resultado')
-    );
-    </script>
+    
 
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
